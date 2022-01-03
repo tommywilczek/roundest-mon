@@ -1,12 +1,16 @@
 import type { NextPage } from 'next'
 import 'tailwindcss/tailwind.css'
 
-const Home: NextPage = () => {
+export default function Home() {
   return (
-    <div className="text-center text-red-900">
-      HELLO WORDL!!1
+    <div className="h-screen w-screen flex flex-col justify-center items-center">
+      <div className='text-2xl text-center'>Which Pokemon is rounder???</div>
+      <div className='p-2'></div>
+      <div className='border rounded p-8 flex items-center justify-between max-w-2xl'>
+        <div className='w-16 h-16 bg-emerald-300'></div>
+        <div className='p-8'>Vs</div>
+        <div className='w-16 h-16 bg-emerald-300'></div>
+      </div>
     </div>
   )
 }
-
-export default Home
