@@ -1,5 +1,6 @@
 import { getOptionsForVote } from '@/utils/getRandomPokemon'
 import { trpc } from '@/utils/trpc'
+import Image from 'next/image';
 import { useState } from 'react';
 import 'tailwindcss/tailwind.css'
 import { inferQueryResponse } from './api/trpc/[trpc]';
@@ -17,12 +18,12 @@ export default function Home() {
   const secondPokemon = trpc.useQuery(['get-pokemon-by-id', { id: secondId }])
 
   const voteMutation = trpc.useMutation(["cast-vote"]);
-  
+
   const voteForRoundest = (selected: number) => {
     if (selected === firstId) {
-      voteMutation.mutate({votedForId: firstId, votedAgainstId: secondId});
+      voteMutation.mutate({ votedForId: firstId, votedAgainstId: secondId });
     } else {
-      voteMutation.mutate({votedForId: secondId, votedAgainstId: firstId});
+      voteMutation.mutate({ votedForId: secondId, votedAgainstId: firstId });
     }
     console.log('selected :>> ', selected);
     // todo: fire mutation to persist changes
@@ -53,6 +54,13 @@ export default function Home() {
           )}
         <div className='p-2'></div>
       </div>
+      <a
+        href="https://github.com/tommywilczek/roundest-mon"
+        className='text-center text-blue-600'
+        target='_blank'
+      >
+        Repo
+      </a>
     </div>
   )
 }
@@ -61,10 +69,12 @@ type PokemonFromServer = inferQueryResponse<"get-pokemon-by-id">;
 
 const PokemonListing: React.FC<{ pokemon: PokemonFromServer, vote: () => void }> = (props) => {
   return <div className='flex flex-col items-center'>
-    <img
+    <Image
       src={props.pokemon.sprite ?? ''}
       alt={props.pokemon.name}
-      className='w-64 h-64'
+      width={256}
+      height={256}
+      layout='fixed'
     />
     <div className='text-xl text-center capitalize mt-[-2rem]'>{props.pokemon.name}</div>
     <button className={btn} onClick={() => props.vote()}>Rounder</button>

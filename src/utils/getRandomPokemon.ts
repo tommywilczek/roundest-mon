@@ -1,5 +1,5 @@
 
-const MAX_DEX_ID = 195;
+const MAX_DEX_ID = 151;
 
 export const getRandomPokemon: (notThisOne?: number) => number = (notThisOne?: number) => {
     const pokedexNumber = Math.floor(Math.random() * MAX_DEX_ID + 1);
