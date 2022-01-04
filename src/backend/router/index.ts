@@ -2,7 +2,7 @@ import * as trpc from '@trpc/server';
 import { z } from 'zod';
 
 import { PokemonClient } from 'pokenode-ts';
-import { resolve } from 'path/posix';
+import { prisma } from '@/backend/utils/prisma';
 
 export const appRouter = trpc.router().query('get-pokemon-by-id', {
   input: z.object({ id: z.number() }),
@@ -18,7 +18,7 @@ export const appRouter = trpc.router().query('get-pokemon-by-id', {
     votedAgainstId: z.number()
   }),
   async resolve({ input }) {
-    const voteInDb = await prisma?.vote.create({
+    const voteInDb = await prisma.vote.create({
       data: {
         ...input
       },

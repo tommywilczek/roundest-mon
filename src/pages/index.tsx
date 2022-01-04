@@ -15,13 +15,15 @@ export default function Home() {
 
   const firstPokemon = trpc.useQuery(['get-pokemon-by-id', { id: firstId }])
   const secondPokemon = trpc.useQuery(['get-pokemon-by-id', { id: secondId }])
-  console.log('firstPokemon :>> ', firstPokemon.data);
 
-  if (firstPokemon.isLoading || secondPokemon.isLoading) {
-    return null;
-  }
-
+  const voteMutation = trpc.useMutation(["cast-vote"]);
+  
   const voteForRoundest = (selected: number) => {
+    if (selected === firstId) {
+      voteMutation.mutate({votedForId: firstId, votedAgainstId: secondId});
+    } else {
+      voteMutation.mutate({votedForId: secondId, votedAgainstId: firstId});
+    }
     console.log('selected :>> ', selected);
     // todo: fire mutation to persist changes
     updateIds(getOptionsForVote());
