@@ -11,17 +11,26 @@ Following Theo - [T3 Tools' guide](https://youtu.be/PKy2lYEnhgs)
 
 [Demo](roundest-mon-xi.vercel.app)
 
----
 
 ## Helpful scripts
 
+### Getting started
+
+```bash
+npm run dev
+```
+
 ### Connect to Planet Scale locally
 
-`pscale connect roundest-mon BRANCH --port 3309`
+```
+pscale connect roundest-mon BRANCH --port 3309
+```
 *replace BRANCH with your branch: main, dev, etc*
 
 ### Connect to Prisma locally
 
-`npx prisma studio`
+```
+npx prisma studio
+```
 
 *Will read from the `.env` file for the connection string*
