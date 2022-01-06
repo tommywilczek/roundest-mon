@@ -31,37 +31,41 @@ export default function Home() {
   }
 
   return (
-    <div className="h-screen w-screen flex flex-col justify-center items-center">
-      <div className='text-2xl text-center'>Which Pokemon is rounder???</div>
-      <div className='p-2'></div>
-      <div className='border rounded p-8 flex items-center justify-between max-w-2xl'>
-        {!firstPokemon.isLoading &&
-          firstPokemon.data &&
-          !secondPokemon.isLoading &&
-          secondPokemon.data &&
-          (
-            <>
-              <PokemonListing
-                pokemon={firstPokemon.data}
-                vote={() => voteForRoundest(firstId)}
-              />
-              <div className='p-8'>Vs</div>
-              <PokemonListing
-                pokemon={secondPokemon.data}
-                vote={() => voteForRoundest(secondId)}
-              />
-            </>
-          )}
+    <>
+      <div className="h-screen w-screen flex flex-col justify-center items-center">
+        <div className='text-2xl text-center'>Which Pokemon is rounder???</div>
         <div className='p-2'></div>
+        <div className='border rounded p-8 flex items-center justify-between max-w-2xl'>
+          {!firstPokemon.isLoading &&
+            firstPokemon.data &&
+            !secondPokemon.isLoading &&
+            secondPokemon.data &&
+            (
+              <>
+                <PokemonListing
+                  pokemon={firstPokemon.data}
+                  vote={() => voteForRoundest(firstId)}
+                />
+                <div className='p-8'>Vs</div>
+                <PokemonListing
+                  pokemon={secondPokemon.data}
+                  vote={() => voteForRoundest(secondId)}
+                />
+              </>
+            )}
+          <div className='p-2'></div>
+        </div>
       </div>
-      <a
-        href="https://github.com/tommywilczek/roundest-mon"
-        className='text-center text-blue-600'
-        target='_blank'
-      >
-        Repo
-      </a>
-    </div>
+        <div className='sticky bottom-0 text-center text-xl'>
+          <a
+            href="https://github.com/tommywilczek/roundest-mon"
+            className='text-center text-blue-600'
+            target='_blank'
+          >
+            Repo
+          </a>
+        </div>
+    </>
   )
 }
 
